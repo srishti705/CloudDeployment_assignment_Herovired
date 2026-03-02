@@ -1,6 +1,12 @@
 # AWS CloudDeployment 
 
-The Travel Memory application is a MERN stack project deployed on an EC2 instance using:
+
+🌍 Travel Memory – AWS Deployment
+📌 Project Overview
+
+This project demonstrates deployment of the Travel Memory (MERN Stack) application on AWS EC2.
+
+The deployment includes:
 
 Backend: Node.js
 
@@ -10,62 +16,97 @@ Database: MongoDB Atlas
 
 Reverse Proxy: Nginx
 
-Load Balancer: AWS ALB
+Load Balancer for scalability
 
-DNS & Security: Cloudflare
-
-Repository Source:
-🔗 https://github.com/UnpredictablePrashant/TravelMemory
-
-
-<h1 align="center" style="color:#2E86C1;">
-🌍 Travel Memory – AWS Deployment
-</h1>
-
-<p align="center">
-<b>Full Stack MERN Application Deployed on AWS EC2</b><br>
-Load Balanced • Reverse Proxied • Custom Domain Connected
-</p>
+Custom Domain using Cloudflare
 
 ---
 
-<p align="center">
 
-![AWS](https://img.shields.io/badge/AWS-EC2-orange?style=for-the-badge)
-![Node](https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge)
-![React](https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen?style=for-the-badge)
-![Nginx](https://img.shields.io/badge/Nginx-Reverse_Proxy-darkgreen?style=for-the-badge)
-![Cloudflare](https://img.shields.io/badge/Cloudflare-DNS-orange?style=for-the-badge)
+🎯 Objectives
 
-</p>
+Set up backend running on Node.js
 
----
+Configure frontend built with React
+
+Ensure communication between frontend & backend
+
+Deploy application on EC2
+
+Enable load balancing with multiple instances
+
+Connect custom domain via Cloudflare
+
 
 ## 📌 <span style="color:#1F618D;">Project Overview</span>
 
-The **Travel Memory** application is a MERN stack project deployed on an Amazon EC2 instance.
-
-This deployment includes:
-
-- 🟢 Node.js Backend
-- ⚛️ React Frontend
-- 🍃 MongoDB Atlas Database
-- 🌐 Nginx Reverse Proxy
-- 🔁 AWS Load Balancer
-- ☁️ Cloudflare DNS Integration
-
----
-
-## 🏗️ <span style="color:#AF601A;">Deployment Architecture</span>
 
 
-Cloning Travel Memory Repo:
+
+##  <span style="color:#AF601A;">Deployment Architecture</span>
+
+🏗️ Deployment Architecture
+
+User -> CloudflareAWS -> Load Balancer -> Multiple EC2 Instances -> Nginx -> Node Backend ->MongoDB Atlas
+
+
+Cloning Travel Memory Repository : 🔗 https://github.com/UnpredictablePrashant/TravelMemory
 
 <img width="621" height="265" alt="image" src="https://github.com/user-attachments/assets/d9c8263a-b1b3-4b31-9180-228450b11677" />
 
 
+⚙️ 1️⃣ Backend Configuration
+
+Step 1: Clone Repository
+git clone https://github.com/UnpredictablePrashant/TravelMemory.git
+cd TravelMemory/backend
+npm install
+Step 2: Create .env File
+
+Create .env inside backend folder:
+
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+Step 3: Install and Configure Nginx
+
+Install Nginx:
+
+sudo apt update
+sudo apt install nginx -y
+
+Remove default config:
+
+sudo rm /etc/nginx/sites-enabled/default
+
+Create new config:
+
+sudo nano /etc/nginx/sites-available/travelmemory
+
+Add:
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://localhost:3000;
+    }
+}
+
+Create soft link:
+
+sudo ln -s /etc/nginx/sites-available/travelmemory /etc/nginx/sites-enabled/
+
+Test & restart:
+
+sudo nginx -t
+sudo systemctl restart nginx
+
+Now backend runs via Port 80.
+
+
 <img width="618" height="295" alt="image" src="https://github.com/user-attachments/assets/ee060dfd-6b52-4ad0-9ea2-97f6719de297" />
+
 
 
 ## Checking Test 
@@ -73,7 +114,8 @@ Cloning Travel Memory Repo:
 <img width="623" height="235" alt="image" src="https://github.com/user-attachments/assets/4e27e2f5-e480-45ea-b68a-87d6e415fb0a" />
 
 
-Installing node.js in Backend server.
+
+
 
 <img width="629" height="303" alt="image" src="https://github.com/user-attachments/assets/854dc4e0-6a5b-4323-a73a-24f3dc65ee51" />
 
@@ -84,17 +126,32 @@ Changing port  in URL
 <img width="618" height="322" alt="image" src="https://github.com/user-attachments/assets/74b640ff-7259-4e5a-b935-e40a1118519e" />
 
 
+
+
 <img width="640" height="344" alt="image" src="https://github.com/user-attachments/assets/1d27df63-20c3-48dd-b91e-60d973ffc0bc" />
 
+## 🔗 2️⃣ Frontend & Backend Connection
 
-Installation of nginx in backend server , removing default folder , creatingb softlink .
+Navigate to:
+
+frontend/src/utils/urls.js
+
+Update base URL:
+
+export const baseUrl = "/api";
+
+Install & build frontend:
+
+cd ../frontend
+npm install
+npm run build
 
 
 <img width="622" height="307" alt="image" src="https://github.com/user-attachments/assets/c41c90dd-1c4b-4514-9e28-b414d4e95b95" />
 
+  EC2 Instance Running
 
-
-
+  
 <img width="622" height="304" alt="image" src="https://github.com/user-attachments/assets/0e77ea4e-a5ba-4e1a-857d-9b544b5ed958" />
 
 
@@ -116,56 +173,90 @@ Installation of nginx in backend server , removing default folder , creatingb so
 
 <span style="color:#B03A2E;">Scaling the Application</span>
 
-To ensure scalability:
 
-✔ Created AMI of EC2
-✔ Launched multiple EC2 instances
-✔ Configured Application Load Balancer
-✔ Added instances to Target Group
+## 🔁 3️⃣ Scaling the Application
 
-Load balancer distributes traffic efficiently across instances.
+To improve performance and availability:
+
+Created AMI of configured EC2 instance
+
+Launched multiple EC2 instances
+
+Created Application Load Balancer
+
+Added instances to target group
+
+Enabled health checks
+
+Load balancer distributes traffic evenly across instances.
 
 
 
 
 <img width="631" height="363" alt="image" src="https://github.com/user-attachments/assets/014d6ad7-ce56-4a63-a09a-1f67b9fe3e84" />
 
-
+Screenshot (Target group in Loadbalancer )
 
 <img width="624" height="324" alt="image" src="https://github.com/user-attachments/assets/3efb36e2-7544-4cc1-9c73-e40bce89e255" />
 
+## 🌐 4️⃣ Domain Setup with Cloudflare
 
-## 🔁 Scaling the Application
+Steps:
 
-To ensure **high availability and scalability**, the following steps were implemented:
+Add domain to Cloudflare.
 
-### 🖥️ 1️⃣ Created an AMI
-- Generated an **Amazon Machine Image (AMI)** from the configured EC2 instance.
-- This allowed quick replication of identical application servers.
+Create CNAME record:
 
-### 🚀 2️⃣ Launched Multiple EC2 Instances
-- Deployed multiple EC2 instances using the created AMI.
-- Ensured consistent configuration across all servers.
+Name: www
 
-### ⚖️ 3️⃣ Configured Application Load Balancer
-- Created an **Application Load Balancer (ALB)**.
-- Configured listener on **Port 80 (HTTP)**.
-- Attached instances to a target group.
+Target: Load Balancer DNS
 
-### 🎯 4️⃣ Added Instances to Target Group
-- Registered all EC2 instances under the same target group.
-- Enabled **health checks** to monitor server status.
+Create A record:
 
----
+Name: @
 
-### ✅ Result
+IP: EC2 public IP
 
-The Load Balancer now distributes incoming traffic efficiently across multiple instances, ensuring:
+Enable proxy (orange cloud).
 
-- ✔ High Availability  
-- ✔ Fault Tolerance  
-- ✔ Better Performance  
-- ✔ Zero Single Point of Failure  
+
+🌍 Live Application
+
+http://yourdomain.com
+
+## 🔐 Security Best Practices
+
+Only ports 22, 80, 443 open
+
+Backend port 3000 not publicly exposed
+
+Environment variables secured
+
+Health checks enabled
+
+SSL enabled in Cloudflare
+
+## 📦 Deliverables
+
+GitHub Repository Link
+
+Live Application URL
+
+Deployment Screenshots
+
+Architecture Diagram
+
+## ✅ Conclusion
+
+The Travel Memory application has been successfully deployed on AWS EC2 with:
+
+Reverse proxy configuration
+
+Load balancing
+
+Custom domain integration
+
+Scalable architecture
 
 
 
