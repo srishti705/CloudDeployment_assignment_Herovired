@@ -114,6 +114,18 @@ Installation of nginx in backend server , removing default folder , creatingb so
 <img width="625" height="332" alt="image" src="https://github.com/user-attachments/assets/4d33ec4f-3d11-47db-aac1-31c7a906b052" />
 
 
+<span style="color:#B03A2E;">Scaling the Application</span>
+
+To ensure scalability:
+
+✔ Created AMI of EC2
+✔ Launched multiple EC2 instances
+✔ Configured Application Load Balancer
+✔ Added instances to Target Group
+
+Load balancer distributes traffic efficiently across instances.
+
+
 
 
 <img width="631" height="363" alt="image" src="https://github.com/user-attachments/assets/014d6ad7-ce56-4a63-a09a-1f67b9fe3e84" />
