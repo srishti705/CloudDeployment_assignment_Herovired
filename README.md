@@ -73,7 +73,7 @@ Cloning Travel Memory Repo:
 <img width="623" height="235" alt="image" src="https://github.com/user-attachments/assets/4e27e2f5-e480-45ea-b68a-87d6e415fb0a" />
 
 
-
+Installing node.js in Backend server.
 
 <img width="629" height="303" alt="image" src="https://github.com/user-attachments/assets/854dc4e0-6a5b-4323-a73a-24f3dc65ee51" />
 
@@ -87,7 +87,7 @@ Changing port  in URL
 <img width="640" height="344" alt="image" src="https://github.com/user-attachments/assets/1d27df63-20c3-48dd-b91e-60d973ffc0bc" />
 
 
-
+Installation of nginx in backend server , removing default folder , creatingb softlink .
 
 
 <img width="622" height="307" alt="image" src="https://github.com/user-attachments/assets/c41c90dd-1c4b-4514-9e28-b414d4e95b95" />
