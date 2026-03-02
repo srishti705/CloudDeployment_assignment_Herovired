@@ -1,5 +1,22 @@
 # AWS CloudDeployment 
 
+The Travel Memory application is a MERN stack project deployed on an EC2 instance using:
+
+Backend: Node.js
+
+Frontend: React
+
+Database: MongoDB Atlas
+
+Reverse Proxy: Nginx
+
+Load Balancer: AWS ALB
+
+DNS & Security: Cloudflare
+
+Repository Source:
+🔗 https://github.com/UnpredictablePrashant/TravelMemory
+
 Cloning Travel Memory Repo:
 
 <img width="621" height="265" alt="image" src="https://github.com/user-attachments/assets/d9c8263a-b1b3-4b31-9180-228450b11677" />
